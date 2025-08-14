@@ -14,7 +14,7 @@ const michroma = Michroma({
 
 const Features = () => {
   return (
-    <div className="mx-[100px] mt-[80px]">
+    <div className="mx-[100px] mt-[80px] ">
       {/* heading and description */}
       <div className="flex justify-between">
         {/* heading */}
@@ -22,7 +22,7 @@ const Features = () => {
 
         {/* description */}
         <div
-          className={`text-lg text-[#646464] ${poppins.className} w-150 text-center`}
+          className={`text-lg text-[#646464] ${poppins.className} w-130 text-center`}
         >
           Upload a YouTube link, Video, document, image, or voice note and let
           Yuki, your AI study companion, explain, answer questions, and guide
@@ -31,7 +31,7 @@ const Features = () => {
       </div>
 
       {/* main feature div */}
-      <div className="flex-col mt-8">
+      <div className="flex-col mt-8 ">
         {/* feature 1 div  */}
 
         <div className="flex gap-4 mb-8">

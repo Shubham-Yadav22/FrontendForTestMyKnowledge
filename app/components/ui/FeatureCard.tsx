@@ -25,8 +25,8 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   const isLarge = size === "large";
 
   // Tailwind classes for width based on size
-  const outerWidth = isLarge ? "w-[780px]" : "w-[440px]";
-  const innerWidth = isLarge ? "w-[740px]" : "w-[400px]";
+  const outerWidth = isLarge ? "w-[830px]" : "w-[480px]";
+  const innerWidth = isLarge ? "w-[790px]" : "w-[440px]";
 
   return (
     <div

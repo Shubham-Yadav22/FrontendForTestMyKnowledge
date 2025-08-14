@@ -1,13 +1,6 @@
 import React from "react";
 import { Michroma, Poppins } from "next/font/google";
-import {
-  ArrowBigDown,
-  ArrowBigRight,
-  ArrowDownRight,
-  ArrowRight,
-  ArrowUp,
-  ArrowUpRight,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const michroma = Michroma({
   weight: "400", // Michroma only has one weight
@@ -39,7 +32,9 @@ const HeroSection = () => {
         </p>
 
         {/* Body text */}
-        <p className={`text-[#646464] ${poppins.className} text-base sm:text-lg lg:text-xl text-center lg:text-left`}>
+        <p
+          className={`text-[#646464] ${poppins.className} text-base sm:text-lg lg:text-xl text-center lg:text-left`}
+        >
           Upload a YouTube link, Video, document, image, or voice note and let
           Yuki, your AI study companion, explain, answer questions, and guide
           you like a personal digital teacher.
@@ -100,9 +95,6 @@ const HeroSection = () => {
           />
         </div>
       </div>
-
-      {/* right side content - image of yuki*/}
-
       <div className="flex justify-center lg:justify-start">
         <div className="relative w-full max-w-[450px]">
           <svg
