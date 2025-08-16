@@ -86,7 +86,7 @@ const HeroSection = () => {
           <input
             type="text"
             name="inbox"
-            className="bg-white h-[46px] w-full rounded-full pl-3 pr-12 text-md border border-[#B9CDDD] text-[#B8CCDD] placeholder-[#B8CCDD] focus:outline-none"
+            className="bg-white h-[46px] w-full rounded-full pl-3 pr-12 text-md border border-[#B9CDDD] text-[#62a2df] placeholder-[#B8CCDD] focus:outline-none"
             placeholder="What do you want to learn today....."
           />
           <ArrowUpRight

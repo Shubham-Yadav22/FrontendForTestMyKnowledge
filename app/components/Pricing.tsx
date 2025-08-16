@@ -44,8 +44,8 @@ const Pricing = () => {
             content={card.content}
             price={card.price}
             features={features}
-            selected={selected === index}
-            onClick={() => setSelected(index)}
+            // selected={selected === index}
+            // onClick={() => setSelected(index)}
           />
         ))}
       </div>

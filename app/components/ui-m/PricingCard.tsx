@@ -15,35 +15,26 @@ interface PricingCardProps {
   content: React.ReactNode;
   price?: string;
   features: string[];
-  selected?: boolean;
-  onClick?: () => void;
 }
 
 const PricingCard: React.FC<PricingCardProps> = ({
   content,
   price = "$0",
   features,
-  selected = false,
-  onClick,
 }) => {
   return (
     <div
-      onClick={onClick}
-      className={`lg:w-[400px] lg:h-[600px] w-full flex flex-col justify-between rounded-2xl shadow-lg p-6 cursor-pointer transition-all duration-500 
-        ${
-          selected
-            ? "bg-gradient-to-b from-[#B8CCDB] to-[#FFFFFF] scale-105 z-10"
-            : "bg-white border border-[#B9CDDD]"
-        }`}
+      className={`lg:w-[400px] lg:h-[600px] w-full flex flex-col justify-between rounded-2xl shadow-lg p-6 cursor-pointer 
+        transition-all duration-500 group
+        bg-white border border-[#B9CDDD]
+        hover:bg-gradient-to-b hover:from-[#B8CCDB] hover:to-[#FFFFFF] hover:scale-105 hover:z-10`}
     >
       {/* Inner Content Box */}
       <div
         className={`w-full h-[200px] flex items-center justify-center mb-6 rounded-2xl transition-all duration-500 
-          ${
-            selected
-              ? "bg-white border-none"
-              : "bg-white border border-[#B9CDDD]"
-          } ${michroma.className}`}
+          bg-white border border-[#B9CDDD]
+          group-hover:bg-white group-hover:border-none
+          ${michroma.className}`}
       >
         {content}
       </div>
@@ -71,7 +62,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
         className={`w-full lg:w-[302px] h-[52px] rounded-xl font-semibold text-black 
           bg-gradient-to-r from-[#FFFFFF] to-[#B8CCDB] hover:from-[#f0f0f0] hover:to-[#a9bdcc] transition-all ${poppins.className}`}
       >
-        Free
+        {price === "$0" ? "free" : price}
       </button>
     </div>
   );

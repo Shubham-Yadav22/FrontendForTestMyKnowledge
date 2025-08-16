@@ -1,11 +1,8 @@
 import React from "react";
 
-
-
 const SubscribeCard = () => {
   return (
     <div className="w-[1240px] h-[515px] rounded-[20px] bg-gradient-to-tr from-[#FFFFFF] to-[#B8CCDB] flex flex-col items-center justify-center p-10 mx-auto mb-30">
-      
       {/* Title */}
       <h1 className="font-[Michroma] text-[60px] leading-[85px] text-center text-black max-w-[828px]">
         Lorem Ipsum is simply dummy text of the
@@ -23,7 +20,12 @@ const SubscribeCard = () => {
           placeholder="abc@xyz.com"
           className="flex-1 h-full outline-none bg-transparent text-[22px] text-[#ACACAC] font-[Poppins] px-4"
         />
-        <button className="w-[302px] h-[52px] bg-gradient-to-tr from-[#FFFFFF] to-[#B8CCDB] border border-[#B9CDDD] rounded-[20px] font-[Poppins] text-[22px] text-black">
+        <button
+          className="w-[302px] h-[52px] bg-gradient-to-tr from-[#FFFFFF] to-[#b6cee1] 
+             border border-[#B9CDDD] rounded-[20px] font-[Poppins] text-[22px] text-black
+             transition-all duration-300 ease-in-out
+             hover:shadow-lg hover:from-[#e6f0f7] hover:to-[#a9c6de]"
+        >
           Subscribe
         </button>
       </div>
