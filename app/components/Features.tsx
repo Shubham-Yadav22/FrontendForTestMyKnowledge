@@ -1,6 +1,6 @@
 import React from "react";
 import { Poppins, Michroma } from "next/font/google";
-import FeatureCard from "./ui/FeatureCard";
+import FeatureCard from "./ui-m/FeatureCard";
 
 const poppins = Poppins({
   weight: "400",
@@ -14,15 +14,17 @@ const michroma = Michroma({
 
 const Features = () => {
   return (
+
     <div className="mx-[100px] mt-[80px] ">
+
       {/* heading and description */}
       <div className="flex justify-between">
         {/* heading */}
-        <div className={`text-5xl ${michroma.className}`}>Tools</div>
+        <div className={`text-5xl ${michroma.className}`}> <span className="text-[#5D85A1]">Smart</span>  Tools</div>
 
         {/* description */}
         <div
-          className={`text-lg text-[#646464] ${poppins.className} w-130 text-center`}
+          className={`text-lg text-[#646464] ${poppins.className} w-130 lg:text-right text-left`}
         >
           Upload a YouTube link, Video, document, image, or voice note and let
           Yuki, your AI study companion, explain, answer questions, and guide

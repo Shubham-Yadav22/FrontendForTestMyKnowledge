@@ -1,21 +1,28 @@
-import HeroSection from "@/app/components/HeroSection";
-import Features from "@/app/components/Features";
-import HowToUse from "@/app/components/HowtoUse";
-import Testimonials from "@/app/components/Testimonials";
-import Pricing from "@/app/components/Pricing";
-import CTA from "@/app/components/CTA";
-import Header from "./components/Header";
+import HeroSection from "@/app/Components/HeroSection";
+import Features from "@/app/Components/Features";
+import HowToUse from "@/app/Components/HowtoUse";
+import Testimonials from "@/app/Components/Testimonials";
+import Pricing from "@/app/Components/Pricing";
+import CTA from "@/app/Components/SubscribeCard";
+import Header from "./Components/Header";
 
 export default function HomePage() {
   return (
-    <>
-      <Header />
-      <HeroSection />
+    <div className="w-full">
+      <div
+        className="w-full bg-[url('/backgroundHero.png')] bg-cover bg-center bg-no-repeat 
+                  [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)]"
+      >
+        <Header />
+        <HeroSection />
+      </div>
+
+
       <Features />
       <HowToUse />
       <Testimonials />
       <Pricing />
       <CTA />
-    </>
+    </div>
   );
 }
