@@ -44,7 +44,7 @@ const PricingCard = ({ content, price, features, selected, onClick }: any) => {
         <ul
           className={`list-disc list-inside space-y-2 text-md text-[#646464] ${poppins.className}`}
         >
-          {features.map((item: any, key: any) => (
+          {features.map((item: string, key: number) => (
             <li key={key}>{item}</li>
           ))}
         </ul>

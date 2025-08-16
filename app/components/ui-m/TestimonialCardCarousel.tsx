@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { div } from "framer-motion/client";
 import React, { useEffect, useState } from "react";
 import { Poppins, Michroma } from "next/font/google";
+import Image from "next/image";
 
 const poppins = Poppins({
   weight: "400",
@@ -120,11 +121,11 @@ export const InfiniteMovingCards = ({
         )}
       >
         {items.map((item, idx) => (
-          <div className="flex justify-between bg-[#B9CDDD] lg:w-[500px] lg:h-[283px] rounded-2xl ">
+          <div key={idx} className="flex justify-between bg-[#B9CDDD] lg:w-[500px] lg:h-[283px] rounded-2xl ">
             {/* Image */}
 
            
-                <img src="userTestimonial.png" alt="" className="w-[214px] h-[214px] mt-17" />
+                <Image src="/userTestimonial.png" alt="" width={214} height={214} className="w-[214px] h-[214px] mt-17" />
           
           
 
