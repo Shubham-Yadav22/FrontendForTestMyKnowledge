@@ -1,7 +1,7 @@
 import React from "react";
 import { Poppins, Michroma } from "next/font/google";
-import { CardCarousel } from "@/components/ui/card-carousel"
-import { tree } from "next/dist/build/templates/app-page";
+import { CardCarousel } from "@/app/components/ui/card-carousel"
+// import { tree } from "next/dist/build/templates/app-page";
 
 
 const poppins = Poppins({

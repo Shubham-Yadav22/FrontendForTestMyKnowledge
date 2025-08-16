@@ -1,10 +1,10 @@
-import HeroSection from "../app/Components/HeroSection";
-import Features from "../app/Components/Features";
-import HowToUse from "../app/Components/HowtoUse";
-import Testimonials from "../app/Components/Testimonials";
-import Pricing from "../app/Components/Pricing";
-import CTA from "../app/Components/SubscribeCard";
-import Header from "../app/Components/Header";
+import HeroSection from "./components/HeroSection";
+import Features from "./components/Features";
+import HowToUse from "./components/HowtoUse";
+import Testimonials from "./components/Testimonials";
+import Pricing from "./components/Pricing";
+import CTA from "./components/SubscribeCard";
+import Header from "./components/Header";
 
 export default function HomePage() {
   return (
