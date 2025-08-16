@@ -1,6 +1,5 @@
-import { div } from "framer-motion/client";
 import React from "react";
-import { Michroma , Poppins} from "next/font/google";
+
 
 
 const SubscribeCard = () => {

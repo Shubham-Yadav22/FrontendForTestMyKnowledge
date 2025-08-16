@@ -11,22 +11,38 @@ const michroma = Michroma({
   subsets: ["latin"],
 });
 
-const PricingCard = ({ content, price, features, selected, onClick }: any) => {
+interface PricingCardProps {
+  content: React.ReactNode;
+  price?: string;
+  features: string[];
+  selected?: boolean;
+  onClick?: () => void;
+}
+
+const PricingCard: React.FC<PricingCardProps> = ({
+  content,
+  price = "$0",
+  features,
+  selected = false,
+  onClick,
+}) => {
   return (
     <div
       onClick={onClick}
       className={`lg:w-[400px] lg:h-[600px] w-full flex flex-col justify-between rounded-2xl shadow-lg p-6 cursor-pointer transition-all duration-500 
-        ${selected 
-          ? "bg-gradient-to-b from-[#B8CCDB] to-[#FFFFFF] scale-115 z-10" 
-          : "bg-white border border-[#B9CDDD]"
+        ${
+          selected
+            ? "bg-gradient-to-b from-[#B8CCDB] to-[#FFFFFF] scale-105 z-10"
+            : "bg-white border border-[#B9CDDD]"
         }`}
     >
       {/* Inner Content Box */}
       <div
         className={`w-full h-[200px] flex items-center justify-center mb-6 rounded-2xl transition-all duration-500 
-          ${selected 
-            ? "bg-white border-none" 
-            : "bg-white border border-[#B9CDDD]"
+          ${
+            selected
+              ? "bg-white border-none"
+              : "bg-white border border-[#B9CDDD]"
           } ${michroma.className}`}
       >
         {content}
@@ -36,7 +52,7 @@ const PricingCard = ({ content, price, features, selected, onClick }: any) => {
       <div
         className={`text-3xl font-bold text-black mb-4 text-left mx-4 ${michroma.className}`}
       >
-        {price || "$0"} <span className="text-lg font-normal">/mo</span>
+        {price} <span className="text-lg font-normal">/mo</span>
       </div>
 
       {/* Features */}
@@ -44,8 +60,8 @@ const PricingCard = ({ content, price, features, selected, onClick }: any) => {
         <ul
           className={`list-disc list-inside space-y-2 text-md text-[#646464] ${poppins.className}`}
         >
-          {features.map((item: string, key: number) => (
-            <li key={key}>{item}</li>
+          {features.map((item, idx) => (
+            <li key={idx}>{item}</li>
           ))}
         </ul>
       </div>

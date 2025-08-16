@@ -13,10 +13,6 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-const poppins600 = Poppins({
-  weight: "600",
-  subsets: ["latin"],
-});
 
 // Testimonials data
 const cardsData = [
