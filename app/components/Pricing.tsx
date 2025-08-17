@@ -18,22 +18,25 @@ const Pricing = () => {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
-    <div className="mx-[100px] mt-[80px] mb-20">
+    <div className="lg:mx-[100px] mt-[80px] mb-20 mx-[20px]">
       {/* heading and description */}
-      <div className="flex justify-between mb-20">
-        <div className={`text-5xl ${michroma.className}`}>Pricing</div>
+      <div className="flex flex-col lg:flex-row justify-between gap-4 lg:mx-[100px]">
+        <div className={`text-3xl lg:text-4xl ${michroma.className}`}>
+          <span className="text-[#5D85A1]">Pricing</span>
+        </div>
 
+        {/* description */}
         <div
-          className={`text-lg text-[#646464] ${poppins.className} w-130 lg:text-right text-left`}
+          className={`text-sm lg:text-lg text-[#646464] ${poppins.className} w-full lg:w-1/2 whitespace-normal lg:text-right`}
         >
-          Upload a YouTube link, Video, document, image, or voice note and let
-          Yuki, your AI study companion, explain, answer questions, and guide
-          you like a personal digital teacher.
+          Yuki gives you everything you need to study efficiently from solving
+          doubts on any lecture to creating quizzes, crafting personalized study
+          plans, and chatting directly with your study materials.
         </div>
       </div>
 
       {/* Pricing Cards */}
-      <div className="flex justify-between gap-6">
+      <div className="flex flex-col md:flex-col lg:flex-row justify-between gap-6 mt-10">
         {[
           { content: "Casual Learner", price: "$0" },
           { content: "Topper's Plan", price: "$20" },
@@ -44,8 +47,6 @@ const Pricing = () => {
             content={card.content}
             price={card.price}
             features={features}
-            // selected={selected === index}
-            // onClick={() => setSelected(index)}
           />
         ))}
       </div>

@@ -36,13 +36,35 @@ export const CardCarousel: React.FC<CarouselProps> = ({
     }
     
     .swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: transparent;
-      width: 580px;
-      height: 340px;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  width: 70%;           /* default mobile width */
+  max-width: 580px;     /* large screens max */
+  height: 200px;        /* default mobile height */
+}
+
+@media (min-width: 640px) {
+  .swiper-slide {
+    width: 60%;         /* small screens slightly bigger */
+    height: 250px;
+  }
+}
+
+@media (min-width: 768px) {
+  .swiper-slide {
+    width: 50%;         /* medium screens */
+    height: 300px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .swiper-slide {
+    width: 45%;         /* large screens */
+    height: 340px;
+  }
+}
 
     .swiper-slide img {
       width: 100%;

@@ -15,25 +15,25 @@ interface FeatureCardProps {
   heading: string;
   subheading: string;
   size?: "large" | "small"; // default = large
+  className?: string;
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({
   heading,
   subheading,
   size = "large",
+  className = "",
 }) => {
   const isLarge = size === "large";
 
-  // Tailwind classes for width based on size
-  const outerWidth = isLarge ? "w-[830px]" : "w-[480px]";
-  const innerWidth = isLarge ? "w-[790px]" : "w-[440px]";
-
   return (
     <div
-      className={`rounded-2xl flex flex-col gap-2 p-4 border border-[#B9CDDD] ${outerWidth}`}
-      style={{
-        background: "linear-gradient(78.26deg, #FFFFFF 0%, #B8CCDB 100%)",
-      }}
+      className={`
+        rounded-2xl flex flex-col gap-2 p-4 border border-[#B9CDDD] 
+        bg-gradient-to-r from-white to-[#B8CCDB] mb-2
+        ${isLarge ? "lg:w-[830px] w-full" : "lg:w-[480px] w-full"}
+        ${className}
+      `}
     >
       <h2 className={`${michroma.className} text-lg`}>{heading}</h2>
 
@@ -41,9 +41,15 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
         {subheading}
       </p>
 
-      <div className={`bg-white h-[208px] rounded-2xl p-5 ${innerWidth}`}></div>
+      <div
+        className={`bg-white h-[208px] rounded-2xl p-5 
+        ${isLarge ? "lg:w-[790px] w-full" : "lg:w-[440px] w-full"}`}
+      ></div>
     </div>
   );
 };
 
 export default FeatureCard;
+
+
+

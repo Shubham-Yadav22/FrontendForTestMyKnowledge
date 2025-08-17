@@ -1,6 +1,6 @@
 import React from "react";
 import { Michroma, Poppins } from "next/font/google";
-import {InfiniteMovingCards} from "./ui-m/TestimonialCardCarousel"; // ✅ import default
+import { InfiniteMovingCards } from "./ui-m/TestimonialCardCarousel"; // ✅ import default
 
 // Fonts
 const michroma = Michroma({
@@ -12,7 +12,6 @@ const poppins = Poppins({
   weight: "400",
   subsets: ["latin"],
 });
-
 
 // Testimonials data
 const cardsData = [
@@ -38,21 +37,21 @@ const cardsData = [
 
 const Testimonials = () => {
   return (
-    <div className="mt-[80px] w-full">
+    <div className=" mt-[80px] mx-[20px] mb-20 ">
       {/* heading and description */}
-      <div className="flex flex-col lg:flex-row justify-between mx-[100px] gap-6">
+      <div className="flex flex-col lg:flex-row justify-between gap-4 lg:mx-[100px]">
         {/* heading */}
-        <div className={`text-5xl ${michroma.className}`}>
+        <div className={`text-3xl lg:text-4xl ${michroma.className}`}>
           <span className="text-[#5D85A1]">Trusted</span> Voices
         </div>
 
         {/* description */}
         <div
-          className={`text-lg text-[#646464] ${poppins.className} max-w-xl lg:text-right text-left`}
+          className={`text-sm lg:text-lg text-[#646464] ${poppins.className} w-full lg:w-1/2 whitespace-normal lg:text-right`}
         >
-          Students, educators, professionals, and innovators alike share how
-          Yuki has transformed the way they learn, teach, and achieve their
-          goals.
+          Yuki gives you everything you need to study efficiently from solving
+          doubts on any lecture to creating quizzes, crafting personalized study
+          plans, and chatting directly with your study materials.
         </div>
       </div>
 

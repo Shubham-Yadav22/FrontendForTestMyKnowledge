@@ -10,13 +10,15 @@ export default function HomePage() {
   return (
     <div className="w-full">
       <div
-        className="w-full bg-[url('/backgroundHero.png')] bg-cover bg-center bg-no-repeat 
-                  [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)]"
+        className="relative w-full 
+             bg-[url('/bgsmall.png')] lg:bg-[url('/backgroundHero.png')] 
+             bg-no-repeat 
+             bg-contain lg:bg-cover
+             [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)]"
       >
         <Header />
         <HeroSection />
       </div>
-
 
       <Features />
       <HowToUse />

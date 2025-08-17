@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { div } from "framer-motion/client";
 import React, { useEffect, useState } from "react";
 import { Poppins, Michroma } from "next/font/google";
 import Image from "next/image";
@@ -12,7 +11,7 @@ const poppins = Poppins({
 });
 
 const michroma = Michroma({
-  weight: "400", // Michroma only has one weight
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -35,75 +34,43 @@ export const InfiniteMovingCards = ({
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
+  const [start, setStart] = useState(false);
 
   useEffect(() => {
     if (!scrollerRef.current) return;
-  
+
     const scroller = scrollerRef.current;
     const scrollerContent = Array.from(scroller.children);
-  
+
     // Clone cards for infinite effect
     scrollerContent.forEach((item) => {
       const duplicatedItem = item.cloneNode(true);
       scroller.appendChild(duplicatedItem);
     });
-  
-    // Force scroll to start at the beginning of a card
-    const firstCard = scroller.querySelector("div"); // assuming each card is a div
-    if (firstCard) {
-      const cardWidth = (firstCard as HTMLElement).offsetWidth;
-      scroller.style.transform = `translateX(0px)`; // make sure we start at exact start
-    }
-  
+
     getDirection();
     getSpeed();
     setStart(true);
   }, [direction, speed]);
 
-
-  const [start, setStart] = useState(false);
-  function addAnimation() {
-    if (containerRef.current && scrollerRef.current) {
-      const scrollerContent = Array.from(scrollerRef.current.children);
-
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
-      });
-
-      getDirection();
-      getSpeed();
-      setStart(true);
-    }
-  }
   const getDirection = () => {
     if (containerRef.current) {
-      if (direction === "left") {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "forwards"
-        );
-      } else {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "reverse"
-        );
-      }
+      containerRef.current.style.setProperty(
+        "--animation-direction",
+        direction === "left" ? "forwards" : "reverse"
+      );
     }
   };
+
   const getSpeed = () => {
     if (containerRef.current) {
-      if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
-      } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
-      } else {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
-      }
+      let duration = "40s";
+      if (speed === "fast") duration = "20s";
+      if (speed === "slow") duration = "80s";
+      containerRef.current.style.setProperty("--animation-duration", duration);
     }
   };
+
   return (
     <div
       ref={containerRef}
@@ -121,13 +88,26 @@ export const InfiniteMovingCards = ({
         )}
       >
         {items.map((item, idx) => (
-          <div key={idx} className="flex justify-between bg-[#B9CDDD] lg:w-[500px] lg:h-[283px] rounded-2xl ">
+          <div
+            key={idx}
+            className="
+              flex justify-between bg-[#B9CDDD] rounded-2xl
+              w-[250px] sm:w-[300px] md:w-[400px] lg:w-[500px]
+              h-[200px] sm:h-[230px] md:h-[260px] lg:h-[283px]
+              p-2
+            "
+          >
             {/* Image */}
-
-           
-                <Image src="/userTestimonial.png" alt="" width={214} height={214} className="w-[214px] h-[214px] mt-17" />
-          
-          
+            <Image
+              src="/userTestimonial.png"
+              alt=""
+              width={214}
+              height={214}
+              className="
+                w-[100px] sm:w-[150px] md:w-[180px] lg:w-[214px]
+                h-auto mt-4
+              "
+            />
 
             {/* Content */}
             <div className="flex-col p-2 mt-2">
@@ -151,31 +131,33 @@ export const InfiniteMovingCards = ({
                     y2="18.993"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stop-color="#C3D1E0" />
-                    <stop offset="1" stop-color="#647F91" />
+                    <stop stopColor="#C3D1E0" />
+                    <stop offset="1" stopColor="#647F91" />
                   </linearGradient>
                 </defs>
               </svg>
 
-              {/* heading and content*/}
-              <div className="flex-col gap-3 p-2">
+              {/* heading and content */}
+              <div className="flex flex-col lg:gap-3 p-2">
                 <div className="mb-4">
-                  <h2 className="text-[#646464] lg:text-lg font-bold">
+                  <p className="text-[#646464] font-bold text-[0.6rem] sm:text-base lg:text-lg break-words">
                     WHAT A UNIQUE SOLUTION
-                  </h2>
+                  </p>
 
-                  <p className="text-sm text-[#646464]">
+                  <p className="text-[#646464]  text-[0.45rem] lg:text-sm break-words overflow-hidden">
                     Upload a YouTube link, Video, document, image, or voice note
                     and let Yuki, your AI study companion, explain, answer
                   </p>
                 </div>
 
                 <div>
-                  <h2 className="text-[#646464] text-lg font-semibold">
+                  <h2 className="text-[#646464] font-semibold text-sm sm:text-base lg:text-lg break-words text-[0.6rem] ">
                     ARJUN KUMAR
                   </h2>
 
-                  <p className="text-md text-[#646464]">UI/UX Designer</p>
+                  <p className="text-[#646464] text-xs sm:text-sm lg:text-sm break-words overflow-hidden text-[0.45rem]">
+                    UI/UX Designer
+                  </p>
                 </div>
               </div>
             </div>

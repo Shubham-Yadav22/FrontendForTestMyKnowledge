@@ -1,6 +1,8 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
-import {  Inter } from "next/font/google";
+import { Inter } from "next/font/google";
+import { Menu, X } from "lucide-react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -8,12 +10,23 @@ const inter = Inter({
 });
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const navItems = ["Home", "Features", "How to Use", "Pricing", "About", "Contact"];
+
   return (
     <header
-      className={`flex justify-between items-center py-[26px] px-[100px] ${inter.className} `}
+      className={`w-full flex justify-between items-center py-5 px-4 sm:px-6 md:px-8 lg:px-[100px] ${inter.className}`}
     >
-      <div className="flex gap-6 items-center justify-center border-b-1 pb-4 text-lg px-3 ">
-        <Link href="/">
+      {/* ---------------------------- */}
+      {/* Left Section: Logo + Features */}
+      {/* ---------------------------- */}
+      <div className="flex items-center lg:border-b-1 lg:border-black pb-5">
+        {/* Yuki Icon (Always Visible) */}
+        <Link href="/" className="block">
+
           <svg
             width="121"
             height="48"
@@ -68,72 +81,36 @@ const Header = () => {
               fill="white"
             />
           </svg>
+            
         </Link>
 
-        <Link
-          href="/"
-          className="relative px-2 py-1 transition-all duration-200 ease-in-out text-gray-800 hover:text-[#5D84A1] 
-             after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#5D84A1] 
-             after:transition-all after:duration-200 hover:after:w-full"
-        >
-          Home
-        </Link>
-
-        <Link
-          href="/"
-          className="relative px-2 py-1 transition-all duration-200 ease-in-out text-gray-800 hover:text-[#5D84A1] 
-             after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#5D84A1] 
-             after:transition-all after:duration-200 hover:after:w-full"
-        >
-          Features
-        </Link>
-
-        <Link
-          href="/"
-          className="relative px-2 py-1 transition-all duration-200 ease-in-out text-gray-800 hover:text-[#5D84A1] 
-             after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#5D84A1] 
-             after:transition-all after:duration-200 hover:after:w-full"
-        >
-          How to Use
-        </Link>
-
-        <Link
-          href="/"
-          className="relative px-2 py-1 transition-all duration-200 ease-in-out text-gray-800 hover:text-[#5D84A1] 
-             after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#5D84A1] 
-             after:transition-all after:duration-200 hover:after:w-full"
-        >
-          Pricing
-        </Link>
-
-        <Link
-          href="/"
-          className="relative px-2 py-1 transition-all duration-200 ease-in-out text-gray-800 hover:text-[#5D84A1] 
-             after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#5D84A1] 
-             after:transition-all after:duration-200 hover:after:w-full"
-        >
-          About
-        </Link>
-
-        <Link
-          href="/"
-          className="relative px-2 py-1 transition-all duration-200 ease-in-out text-gray-800 hover:text-[#5D84A1] 
-             after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#5D84A1] 
-             after:transition-all after:duration-200 hover:after:w-full"
-        >
-          Contact
-        </Link>
+        {/* Features (Only visible in lg+) */}
+        <nav className="hidden lg:flex gap-6 ml-8 text-lg relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] ">
+          {navItems.map((item) => (
+            <Link
+              key={item}
+              href="/"
+              className="relative px-2 py-1 transition-all duration-200 ease-in-out text-gray-800 hover:text-[#5D84A1] 
+              after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#5D84A1] 
+              after:transition-all after:duration-200 hover:after:w-full"
+            >
+              {item}
+            </Link>
+          ))}
+        </nav>
       </div>
 
-      <div className="flex items-center justify-between gap-3  bg-[#B9CDDC] text-lg text-white rounded-full  ">
-        {/* Login and SignUp Option */}
+      {/* ---------------------------- */}
+      {/* Right Section */}
+      {/* ---------------------------- */}
+
+      {/* Desktop (lg+) Login/Signup + Profile */}
+      <div className="hidden lg:flex items-center gap-3 bg-[#B9CDDC] text-lg text-white rounded-full">
         <Link href="/" className="pl-4">
           Login/Signup
         </Link>
-        {/* Profile Icon */}
-        <Link href="/"
-        className="">
-          <svg
+        <Link href="/">
+           <svg
             width="40"
             height="40"
             viewBox="0 0 40 40"
@@ -174,6 +151,40 @@ const Header = () => {
           </svg>
         </Link>
       </div>
+
+      {/* Mobile/Tablet (sm & md) Hamburger */}
+      <button
+        className="lg:hidden text-gray-700"
+        onClick={toggleMenu}
+        aria-label="Toggle menu"
+      >
+        {isOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
+
+      {/* Mobile Menu Dropdown */}
+      {isOpen && (
+        <div className="absolute top-20 left-0 w-full bg-white shadow-md z-50 flex flex-col items-center gap-6 py-6 text-lg">
+          {navItems.map((item) => (
+            <Link
+              key={item}
+              href="/"
+              onClick={() => setIsOpen(false)}
+              className="text-gray-800 hover:text-[#5D84A1]"
+            >
+              {item}
+            </Link>
+          ))}
+
+          {/* Login/Signup for Mobile */}
+          <Link
+            href="/"
+            onClick={() => setIsOpen(false)}
+            className="bg-[#B9CDDC] text-white px-4 py-2 rounded-full"
+          >
+            Login/Signup
+          </Link>
+        </div>
+      )}
     </header>
   );
 };
