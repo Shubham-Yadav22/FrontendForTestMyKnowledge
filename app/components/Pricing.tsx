@@ -20,7 +20,7 @@ const Pricing = () => {
   return (
     <div className="lg:mx-[100px] mt-[80px] mb-20 mx-[20px]">
       {/* heading and description */}
-      <div className="flex flex-col lg:flex-row justify-between gap-4 lg:mx-[100px]">
+      <div className="flex flex-col lg:flex-row justify-between gap-4 ">
         <div className={`text-3xl lg:text-4xl ${michroma.className}`}>
           <span className="text-[#5D85A1]">Pricing</span>
         </div>

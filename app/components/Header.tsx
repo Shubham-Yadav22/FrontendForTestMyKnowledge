@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Inter } from "next/font/google";
 import { Menu, X } from "lucide-react";
+import { UserButton, SignInButton, SignUpButton, useUser , afterSignOutUrl } from "@clerk/nextjs";
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -11,9 +13,8 @@ const inter = Inter({
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { isSignedIn } = useUser();
   const toggleMenu = () => setIsOpen(!isOpen);
-
   const navItems = ["Home", "Features", "How to Use", "Pricing", "About", "Contact"];
 
   return (
@@ -105,8 +106,10 @@ const Header = () => {
       {/* ---------------------------- */}
 
       {/* Desktop (lg+) Login/Signup + Profile */}
-      <div className="hidden lg:flex items-center gap-3 bg-[#B9CDDC] text-lg text-white rounded-full">
-        <Link href="/" className="pl-4">
+      {isSignedIn ? (
+            <UserButton afterSignOutUrl="/" />
+          ) : ( <div className="hidden lg:flex items-center gap-3 bg-[#B9CDDC] text-lg text-white rounded-full">
+        <Link href="/login" className="pl-4">
           Login/Signup
         </Link>
         <Link href="/">
@@ -150,9 +153,10 @@ const Header = () => {
             </defs>
           </svg>
         </Link>
-      </div>
+      </div>)}
 
       {/* Mobile/Tablet (sm & md) Hamburger */}
+      
       <button
         className="lg:hidden text-gray-700"
         onClick={toggleMenu}
@@ -160,6 +164,7 @@ const Header = () => {
       >
         {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
+     
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
