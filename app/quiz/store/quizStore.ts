@@ -1,6 +1,5 @@
 // quizStore.ts
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 import axios from "axios";
 
 type Phase = "setup" | "loading" | "playing" | "result";

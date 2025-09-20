@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Inter } from "next/font/google";
 import { Menu, X } from "lucide-react";
-import { UserButton, SignInButton, SignUpButton, useUser , afterSignOutUrl } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 
 const inter = Inter({

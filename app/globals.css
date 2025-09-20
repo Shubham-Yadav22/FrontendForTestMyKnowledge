@@ -171,4 +171,116 @@ body {
   100% { transform: translateX(100%); }
 }
 
+/* Custom Scrollbar Styles for Document Viewer */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-track {
+  background: #e5e7eb;
+  height: 8px;
+  border-radius: 4px;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #3b82f6;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  background: #2563eb;
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.8s ease;
+}
+
+.slider::-webkit-slider-thumb:active {
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+/* Firefox styles */
+.slider::-moz-range-track {
+  background: #e5e7eb;
+  height: 8px;
+  border-radius: 4px;
+  border: none;
+}
+
+.slider::-moz-range-thumb {
+  background: #3b82f6;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+  background: #2563eb;
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.8s ease;
+}
+
+/* Hide ALL PDF loading indicators and progress bars */
+.react-pdf__Page__canvas {
+  transition: opacity 0.1s ease;
+}
+
+.react-pdf__Page__textContent {
+  transition: opacity 0.1s ease;
+}
+
+/* Hide all loading messages and spinners */
+.react-pdf__message,
+.react-pdf__Page__loading,
+.react-pdf__Page__progress,
+[data-testid="loading"],
+.react-pdf__Page__loadingMessage,
+.react-pdf__Page__loadingSpinner,
+.react-pdf__Page__loadingOverlay,
+.react-pdf__Page__loadingBar,
+.react-pdf__Page__loadingIndicator {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Hide any loading overlays or progress indicators */
+.react-pdf__Page > div[style*="loading"],
+.react-pdf__Page > div[style*="progress"],
+.react-pdf__Page > div[style*="spinner"] {
+  display: none !important;
+}
+
+/* Hide loading text or any loading content */
+.react-pdf__Page *[class*="loading"],
+.react-pdf__Page *[class*="progress"],
+.react-pdf__Page *[class*="spinner"] {
+  display: none !important;
+}
+
+/* Ensure no loading states are visible */
+.react-pdf__Page[data-loading="true"] * {
+  display: none !important;
+}
+
+.react-pdf__Page[data-loading="true"] .react-pdf__Page__canvas {
+  display: block !important;
+}
+
 

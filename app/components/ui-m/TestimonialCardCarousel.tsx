@@ -2,18 +2,10 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
-import { Poppins, Michroma } from "next/font/google";
 import Image from "next/image";
+import { get } from "http";
 
-const poppins = Poppins({
-  weight: "400",
-  subsets: ["latin"],
-});
 
-const michroma = Michroma({
-  weight: "400",
-  subsets: ["latin"],
-});
 
 export const InfiniteMovingCards = ({
   items,
@@ -36,23 +28,6 @@ export const InfiniteMovingCards = ({
   const scrollerRef = React.useRef<HTMLUListElement>(null);
   const [start, setStart] = useState(false);
 
-  useEffect(() => {
-    if (!scrollerRef.current) return;
-
-    const scroller = scrollerRef.current;
-    const scrollerContent = Array.from(scroller.children);
-
-    // Clone cards for infinite effect
-    scrollerContent.forEach((item) => {
-      const duplicatedItem = item.cloneNode(true);
-      scroller.appendChild(duplicatedItem);
-    });
-
-    getDirection();
-    getSpeed();
-    setStart(true);
-  }, [direction, speed]);
-
   const getDirection = () => {
     if (containerRef.current) {
       containerRef.current.style.setProperty(
@@ -70,6 +45,24 @@ export const InfiniteMovingCards = ({
       containerRef.current.style.setProperty("--animation-duration", duration);
     }
   };
+
+    useEffect(() => {
+    if (!scrollerRef.current) return;
+
+    const scroller = scrollerRef.current;
+    const scrollerContent = Array.from(scroller.children);
+
+    // Clone cards for infinite effect
+    scrollerContent.forEach((item) => {
+      const duplicatedItem = item.cloneNode(true);
+      scroller.appendChild(duplicatedItem);
+    });
+
+    getDirection();
+    getSpeed();
+    setStart(true);
+  }, [direction,speed]);
+
 
   return (
     <div

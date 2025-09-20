@@ -5,7 +5,6 @@ import {
   Line,
   XAxis,
   YAxis,
-  Tooltip,
   ResponsiveContainer,
   CartesianGrid,
   LabelList,
@@ -105,7 +104,7 @@ const QuizResultChart = () => {
                 <LabelList
                   dataKey="x"
                   position="right"
-                  content={({ x, y, value, index }) =>
+                  content={({ x, y, index }) =>
                     index === 1 &&
                     typeof x === "number" &&
                     typeof y === "number" ? ( // केवल दूसरे बिंदु पर और x, y निश्चित रूप से नंबर हों

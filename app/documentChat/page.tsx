@@ -1,47 +1,30 @@
 "use client";
-// Make sure the file exists at the specified path, or update the path if necessary
-import ChatWindow from "./component/ChatWindow";
-import ChatSidebar from "./component/ChatSidebar";
+// import ChatWindow from "./DocumentChat/ChatWindow";
+import ChatSidebar from "./DocumentChat/ChatSideBar";
 import Header from "../components/Header";
-import { Michroma, Poppins } from "next/font/google";
+import DocumentToolbar from "./DocumentChat/DocumentToolbar";
+import DocumentWithChat from "./DocumentChat/DocumentWithChat";
 
-const michroma = Michroma({
-  weight: "400",
-  subsets: ["latin"],
-});
-
-const poppins = Poppins({
-  weight: "400",
-  subsets: ["latin"],
-});
-
-export default function DocumentChat() {
+export default function ChatDocument() {
   return (
-    <div className="lg:mx-[100px] h-screen flex flex-col">
+    <div className="lg:mx-20 flex flex-col min-h-full mb-10">
+      {/* Top Header */}
       <Header />
-      <div className="mx-6 lg:mx-24">
-        <div className="flex flex-col lg:flex-row justify-between gap-6 mt-10">
-          {/* Heading */}
-          <h1
-            className={`text-3xl sm:text-4xl lg:text-5xl ${michroma.className}`}
-          >
-            <span className="text-[#5D85A1]">Smart</span> Tools
-          </h1>
 
-          {/* Description */}
-          <p
-            className={`text-sm sm:text-base lg:text-lg text-[#646464] ${poppins.className} w-full lg:w-1/2 text-left lg:text-right`}
-          >
-            Yuki gives you everything you need to study efficiently from solving
-            doubts on any lecture to creating quizzes, crafting personalized
-            study plans, and chatting directly with your study materials.
-          </p>
+      {/* Main Chat Layout */}
+      <div className="flex flex-col lg:w-[1160px] mx-auto mt-8 rounded-2xl shadow-lg overflow-hidden min-h-0 pb-7 bg-gradient-to-tr from-white to-[#B8CCDB]">
+        {/* Toolbar */}
+        <div className="lg:w-[1160px] p-4 max-h-full overflow-y-auto border-r border-gray-200">
+          <DocumentToolbar />
         </div>
-      </div>
 
-      <div className="flex h-screen bg-gray-50 lg:w-[1160px] mx-auto">
+        <div className="flex min-h-screen flex-1 overflow-hidden gap-4 px-4">
 
-
+          {/* Chat Window */}
+          <div className="flex-1 bg-gray-50 min-h-0 flex flex-col border-[#B9CDDD] border rounded-2xl">
+            <DocumentWithChat/>
+          </div>
+        </div>
       </div>
     </div>
   );

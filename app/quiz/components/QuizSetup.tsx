@@ -39,8 +39,6 @@ const Quiz = () => {
     difficulty,
     numQuestions,
     videoDetails, // ✅ keep     // ✅ keep
-    error,
-    getResults,
     loadingMessage,
     phase,
   } = useQuizStore();

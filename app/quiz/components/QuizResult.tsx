@@ -16,10 +16,9 @@ const QuizResult = () => {
   // const { results, quizData, reset } = useQuizStore();
   const router = useRouter();//
 
-  const { results, quizData, reset,videoDetails , reattempt, recreateQuiz } = useQuizStore();
+  const { results, quizData, videoDetails , reattempt, recreateQuiz } = useQuizStore();
   console.log(results)
   const [showAnswers, setShowAnswers] = useState(false);
-  const {getToken} = useAuth()
 
 
   const handleRecreate = () => {

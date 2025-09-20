@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Michroma, Poppins } from "next/font/google";
 import PricingCard from "./ui-m/PricingCard";
 
@@ -15,7 +15,7 @@ const features = [
 ];
 
 const Pricing = () => {
-  const [selected, setSelected] = useState<number | null>(null);
+  // const [selected, setSelected] = useState<number | null>(null);
 
   return (
     <div className="lg:mx-[100px] mt-[80px] mb-20 mx-[20px]">
