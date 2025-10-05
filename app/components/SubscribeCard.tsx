@@ -13,7 +13,7 @@ const SubscribeCard = () => {
         className="font-[Michroma] text-3xl md:text-5xl lg:text-[60px] leading-snug md:leading-[70px] lg:leading-[85px] 
         text-center text-black max-w-[828px] mb-4 md:mb-6"
       >
-        Lorem Ipsum is simply dummy text of the
+        Stay Ahead in Your Learning Journey
       </h1>
 
       {/* Subtitle */}
@@ -21,8 +21,9 @@ const SubscribeCard = () => {
         className="font-[Poppins] text-base md:text-lg lg:text-[22px] leading-relaxed md:leading-[28px] lg:leading-[33px] 
         text-center text-black max-w-[485px] mb-8 md:mb-12"
       >
-        Lorem Ipsum is simply dummy text of the
-      </p>
+        Get updates, insights, and learning tips from Yuki — straight to your inbox. 
+  
+     </p>
 
       {/* Search Bar */}
       <div className="w-full max-w-[822px] flex flex-col lg:flex-row items-center">
