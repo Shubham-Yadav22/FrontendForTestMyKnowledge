@@ -42,7 +42,14 @@ export async function chatWithDocument(sessionId: string, prompt: string) {
     console.log("[Chat API] Response:", res.data);
     return res.data;
   } catch (err: unknown) {
-    console.error("[Chat API] Error:", (err as any)?.response?.data || (err instanceof Error ? err.message : 'Unknown error'));
+    // Type guard for AxiosError
+    if (axios.isAxiosError(err)) {
+      console.error("[Chat API] Axios error:", err.response?.data || err.message);
+    } else if (err instanceof Error) {
+      console.error("[Chat API] Error:", err.message);
+    } else {
+      console.error("[Chat API] Unknown error:", err);
+    }
     throw err;
   }
 }

@@ -27,29 +27,32 @@ export const InfiniteMovingCards = ({
   const scrollerRef = React.useRef<HTMLUListElement>(null);
   const [start, setStart] = useState(false);
 
-  const getDirection = () => {
-    if (containerRef.current) {
-      containerRef.current.style.setProperty(
-        "--animation-direction",
-        direction === "left" ? "forwards" : "reverse"
-      );
-    }
-  };
 
-  const getSpeed = () => {
-    if (containerRef.current) {
-      let duration = "40s";
-      if (speed === "fast") duration = "20s";
-      if (speed === "slow") duration = "80s";
-      containerRef.current.style.setProperty("--animation-duration", duration);
-    }
-  };
 
     useEffect(() => {
     if (!scrollerRef.current) return;
 
     const scroller = scrollerRef.current;
     const scrollerContent = Array.from(scroller.children);
+
+
+    const getDirection = () => {
+      if (containerRef.current) {
+        containerRef.current.style.setProperty(
+          "--animation-direction",
+          direction === "left" ? "forwards" : "reverse"
+        );
+      }
+    };
+  
+    const getSpeed = () => {
+      if (containerRef.current) {
+        let duration = "40s";
+        if (speed === "fast") duration = "20s";
+        if (speed === "slow") duration = "80s";
+        containerRef.current.style.setProperty("--animation-duration", duration);
+      }
+    };
 
     // Clone cards for infinite effect
     scrollerContent.forEach((item) => {
@@ -60,7 +63,7 @@ export const InfiniteMovingCards = ({
     getDirection();
     getSpeed();
     setStart(true);
-  }, [direction, speed, getDirection, getSpeed]);
+  }, [direction, speed]);
 
 
   return (

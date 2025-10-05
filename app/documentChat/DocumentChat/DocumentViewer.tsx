@@ -217,12 +217,16 @@ const DocumentViewer: React.FC = () => {
   const rotation = useDocumentChatStore((s) => s.rotation);
   const fileType = useDocumentChatStore((s) => s.fileType);
   const currentPage = useDocumentChatStore((s) => s.currentPage);
+  const setPage = useDocumentChatStore((s) => s.setPage);
 
   const [numPages, setNumPages] = useState<number>(0);
 
   const documentSrc = blobUrl || filePath;
 
-  // Ensure PDF.js worker is configured
+  const containerRef = useRef<HTMLDivElement>(null);
+  const pageRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Always run this hook (top level)
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
@@ -234,52 +238,26 @@ const DocumentViewer: React.FC = () => {
     }
   }, []);
 
-  if (!documentSrc) {
-    return (
-      <div className="flex-1 flex items-center justify-center text-gray-400">
-        <p>No document loaded</p>
-      </div>
-    );
-  }
-
-  // File type checks
-  const isPDF =
-    fileType === "application/pdf" ||
-    (documentSrc && documentSrc.toLowerCase().includes(".pdf"));
-  const isImage = fileType && fileType.startsWith("image/");
-  const isWord =
-    fileType === "application/msword" ||
-    fileType ===
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-
-  // Always call hooks at the top level
-  const containerRef = useRef<HTMLDivElement>(null);
-  const pageRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const setPage = useDocumentChatStore((s) => s.setPage);
-
-  // Scroll to current page when it changes
+  // Scroll to current page
   useEffect(() => {
-    if (isPDF && pageRefs.current[currentPage - 1]) {
+    if (pageRefs.current[currentPage - 1]) {
       pageRefs.current[currentPage - 1]?.scrollIntoView({
         behavior: "smooth",
         block: "center",
       });
     }
-  }, [currentPage, zoom, rotation, isPDF]);
+  }, [currentPage, zoom, rotation]);
 
-  // Update current page on scroll
+  // Update page on scroll
   useEffect(() => {
-    if (!isPDF || !containerRef.current) return;
+    if (!containerRef.current) return;
     const onScroll = () => {
-      if (!containerRef.current) return;
-      const containerTop = containerRef.current.getBoundingClientRect().top;
+      const containerTop = containerRef.current!.getBoundingClientRect().top;
       let closest = 1,
         minDist = Infinity;
       pageRefs.current.forEach((el, idx) => {
         if (el) {
-          const dist = Math.abs(
-            el.getBoundingClientRect().top - containerTop
-          );
+          const dist = Math.abs(el.getBoundingClientRect().top - containerTop);
           if (dist < minDist) {
             minDist = dist;
             closest = idx + 1;
@@ -291,25 +269,35 @@ const DocumentViewer: React.FC = () => {
     const container = containerRef.current;
     container.addEventListener("scroll", onScroll);
     return () => container.removeEventListener("scroll", onScroll);
-  }, [setPage, isPDF]);
+  }, [setPage]);
+
+  // File type checks
+  const isPDF =
+    fileType === "application/pdf" ||
+    (documentSrc && documentSrc.toLowerCase().includes(".pdf"));
+  const isImage = fileType && fileType.startsWith("image/");
+  const isWord =
+    fileType === "application/msword" ||
+    fileType ===
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+
+  // --- CONDITIONAL RENDERING ONLY AFTER HOOKS ---
+  if (!documentSrc) {
+    return (
+      <div className="flex-1 flex items-center justify-center text-gray-400">
+        <p>No document loaded</p>
+      </div>
+    );
+  }
 
   if (isPDF) {
     if (typeof window === "undefined") return null;
-
     return (
       <div className="flex-1 flex flex-col bg-gray-100">
         <div
           ref={containerRef}
           className="flex-1 overflow-y-auto"
-          style={{
-            scrollSnapType: "y mandatory",
-            height: "100%",
-            maxHeight: "90vh",
-            WebkitOverflowScrolling: "touch",
-            scrollBehavior: "smooth",
-            gap: 32,
-            padding: 0,
-          }}
+          style={{ scrollSnapType: "y mandatory", maxHeight: "90vh", gap: 32 }}
         >
           <Document
             file={documentSrc}
@@ -317,40 +305,17 @@ const DocumentViewer: React.FC = () => {
               setNumPages(numPages);
               setTotalPages(numPages);
             }}
-            onLoadError={(err) => console.error("PDF load error:", err)}
-            loading={
-              <p className="text-center text-gray-600">Loading PDF...</p>
-            }
           >
-            {numPages > 0 &&
-              Array.from({ length: numPages }, (_, index) => (
-                <div
-                  key={`page_${index + 1}`}
-                  ref={(el) => {
-                    pageRefs.current[index] = el;
-                  }}
-                  className={`flex justify-center bg-white rounded-lg shadow-md transition-shadow duration-300 ${
-                    currentPage === index + 1 ? "ring-2 ring-blue-400" : ""
-                  }`}
-                  style={{
-                    scrollSnapAlign: "start",
-                    margin: "1rem auto",
-                    padding: "1rem",
-                    boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
-                  }}
-                >
-                  <div className="overflow-auto flex justify-center">
-                    <Page
-                      pageNumber={index + 1}
-                      scale={zoom}
-                      rotate={rotation}
-                      renderTextLayer
-                      renderAnnotationLayer
-                      loading={<p>Loading page {index + 1}...</p>}
-                    />
-                  </div>
-                </div>
-              ))}
+            {Array.from({ length: numPages }, (_, index) => (
+              <div
+                key={index}
+                ref={(el) => {
+                  pageRefs.current[index] = el;
+                }}
+              >
+                <Page pageNumber={index + 1} scale={zoom} rotate={rotation} />
+              </div>
+            ))}
           </Document>
         </div>
       </div>
@@ -360,37 +325,24 @@ const DocumentViewer: React.FC = () => {
   if (isImage) {
     return (
       <div className="flex-1 flex items-center justify-center bg-gray-100">
-        <Image
-          src={documentSrc}
-          alt="Uploaded"
-          className="max-w-full max-h-full object-contain rounded shadow"
-          width={800}
-          height={600}
-        />
+        <Image src={documentSrc} alt="Uploaded" width={800} height={600} />
       </div>
     );
   }
 
   if (isWord) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center text-gray-400 bg-gray-100">
+      <div className="flex-1 flex flex-col items-center justify-center">
         <p>Word document uploaded. Preview not available in browser.</p>
-        <a
-          href={documentSrc}
-          download
-          className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
+        <a href={documentSrc} download>
           Download & Open in Word
         </a>
       </div>
     );
   }
 
-  return (
-    <div className="flex-1 flex items-center justify-center text-gray-400">
-      <p>Unsupported file type: {fileType || "Unknown"}</p>
-    </div>
-  );
+  return <p>Unsupported file type</p>;
 };
+
 
 export default DocumentViewer;

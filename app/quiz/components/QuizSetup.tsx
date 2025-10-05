@@ -4,6 +4,7 @@ import Header from "@/app/components/Header";
 import { Poppins, Michroma } from "next/font/google";
 import { useQuizStore } from "../store/quizStore";
 import { useAuth } from "@clerk/nextjs";
+import Image from "next/image";
 // import { useQuizStore } from "@/store/quizStore";
 
 const poppins = Poppins({
@@ -148,7 +149,7 @@ const Quiz = () => {
           <div className="w-full h-auto lg:h-[470px] flex flex-col gap-4 rounded-2xl bg-[#B9CDDD] p-4">
             {videoDetails ? (
               <div className="w-full h-auto flex flex-col gap-4 rounded-2xl bg-[#B9CDDD] p-4">
-                <img
+                <Image
                   src={videoDetails.thumbnail_url}
                   alt={videoDetails.title}
                   className="w-full h-[200px] sm:h-[250px] lg:h-[300px]  rounded-2xl"
