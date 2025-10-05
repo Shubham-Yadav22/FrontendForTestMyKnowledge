@@ -81,7 +81,7 @@ const Quiz = () => {
 
   // Triggered on Generate Quiz
   const handleGenerateQuiz = async () => {
-    setOptions(videoUrl, difficultyLevel as any, numberOfQuestions);
+    setOptions(videoUrl, difficultyLevel as "easy" | "medium" | "hard", numberOfQuestions);
     await startQuizFlow(getToken, "Postman");
   };
 
@@ -131,7 +131,7 @@ const Quiz = () => {
                 setVideoUrl(e.target.value);
                 setOptions(
                   e.target.value,
-                  (difficulty as any) ?? (difficultyLevel as any),
+                  (difficulty as "easy" | "medium" | "hard") ?? (difficultyLevel as "easy" | "medium" | "hard"),
                   numQuestions ?? numberOfQuestions
                 );
               }}
@@ -200,7 +200,7 @@ const Quiz = () => {
                     setNumberOfQuestions(item);
                     setOptions(
                       videoId ?? videoUrl,
-                      (difficulty as any) ?? (difficultyLevel as any),
+                      (difficulty as "easy" | "medium" | "hard") ?? (difficultyLevel as "easy" | "medium" | "hard"),
                       item
                     );
                   }}
@@ -233,7 +233,7 @@ const Quiz = () => {
                     setDifficultyLevel(item);
                     setOptions(
                       videoId ?? videoUrl,
-                      item as any,
+                      item as "easy" | "medium" | "hard",
                       numQuestions ?? numberOfQuestions
                     );
                   }}

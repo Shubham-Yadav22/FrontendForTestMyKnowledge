@@ -23,7 +23,6 @@ const DocumentWithChat: React.FC = () => {
     setDocument,
   } = useDocumentChatStore();
 
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
 
@@ -33,7 +32,7 @@ const DocumentWithChat: React.FC = () => {
   useEffect(() => {
     const initSession = async () => {
       try {
-        let savedSessionId = localStorage.getItem("session_id");
+        const savedSessionId = localStorage.getItem("session_id");
         if (savedSessionId) {
           setSessionId(savedSessionId);
           console.log("Reusing saved session ID:", savedSessionId);
@@ -67,7 +66,6 @@ const DocumentWithChat: React.FC = () => {
     }
 
     try {
-      setLoading(true);
       setError(null);
 
       console.log(sessionId)
@@ -87,7 +85,7 @@ const DocumentWithChat: React.FC = () => {
       console.error("Upload failed:", err);
       setError("Upload failed due to network or server error.");
     } finally {
-      setLoading(false);
+      // Loading state removed
     }
   };
 

@@ -205,6 +205,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { useDocumentChatStore } from "@/app/documentChat/store/documentChatStore";
+import Image from "next/image";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 
@@ -251,48 +252,49 @@ const DocumentViewer: React.FC = () => {
     fileType ===
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
+  // Always call hooks at the top level
+  const containerRef = useRef<HTMLDivElement>(null);
+  const pageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const setPage = useDocumentChatStore((s) => s.setPage);
+
+  // Scroll to current page when it changes
+  useEffect(() => {
+    if (isPDF && pageRefs.current[currentPage - 1]) {
+      pageRefs.current[currentPage - 1]?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [currentPage, zoom, rotation, isPDF]);
+
+  // Update current page on scroll
+  useEffect(() => {
+    if (!isPDF || !containerRef.current) return;
+    const onScroll = () => {
+      if (!containerRef.current) return;
+      const containerTop = containerRef.current.getBoundingClientRect().top;
+      let closest = 1,
+        minDist = Infinity;
+      pageRefs.current.forEach((el, idx) => {
+        if (el) {
+          const dist = Math.abs(
+            el.getBoundingClientRect().top - containerTop
+          );
+          if (dist < minDist) {
+            minDist = dist;
+            closest = idx + 1;
+          }
+        }
+      });
+      setPage(closest);
+    };
+    const container = containerRef.current;
+    container.addEventListener("scroll", onScroll);
+    return () => container.removeEventListener("scroll", onScroll);
+  }, [setPage, isPDF]);
+
   if (isPDF) {
     if (typeof window === "undefined") return null;
-
-    const containerRef = useRef<HTMLDivElement>(null);
-    const pageRefs = useRef<(HTMLDivElement | null)[]>([]);
-    const setPage = useDocumentChatStore((s) => s.setPage);
-
-    // Scroll to current page when it changes
-    useEffect(() => {
-      if (pageRefs.current[currentPage - 1]) {
-        pageRefs.current[currentPage - 1]?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-      }
-    }, [currentPage, zoom, rotation]);
-
-    // Update current page on scroll
-    useEffect(() => {
-      if (!containerRef.current) return;
-      const onScroll = () => {
-        if (!containerRef.current) return;
-        const containerTop = containerRef.current.getBoundingClientRect().top;
-        let closest = 1,
-          minDist = Infinity;
-        pageRefs.current.forEach((el, idx) => {
-          if (el) {
-            const dist = Math.abs(
-              el.getBoundingClientRect().top - containerTop
-            );
-            if (dist < minDist) {
-              minDist = dist;
-              closest = idx + 1;
-            }
-          }
-        });
-        setPage(closest);
-      };
-      const container = containerRef.current;
-      container.addEventListener("scroll", onScroll);
-      return () => container.removeEventListener("scroll", onScroll);
-    }, [setPage]);
 
     return (
       <div className="flex-1 flex flex-col bg-gray-100">
@@ -358,10 +360,12 @@ const DocumentViewer: React.FC = () => {
   if (isImage) {
     return (
       <div className="flex-1 flex items-center justify-center bg-gray-100">
-        <img
+        <Image
           src={documentSrc}
           alt="Uploaded"
           className="max-w-full max-h-full object-contain rounded shadow"
+          width={800}
+          height={600}
         />
       </div>
     );

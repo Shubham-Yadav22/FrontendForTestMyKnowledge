@@ -201,12 +201,12 @@ export const useQuizStore = create<QuizStore>()(
         const rawQuestions = startRes.data.quiz_questions;
 
         const questions: UIQuestion[] = rawQuestions.map(
-          (q: any, idx: number) => ({
+          (q: Record<string, unknown>, idx: number) => ({
             id: idx + 1,
-            question: q.question,
-            options: Object.values(q.options),
-            correctAnswer: q.options[q.correct_answer],
-            explanation: q.explanation,
+            question: q.question as string,
+            options: Object.values(q.options as Record<string, string>),
+            correctAnswer: (q.options as Record<string, string>)[q.correct_answer as string],
+            explanation: q.explanation as string,
           })
         );
 
@@ -313,8 +313,8 @@ export const useQuizStore = create<QuizStore>()(
             },
             phase: "result",
           });
-        } catch (err: any) {
-          set({ error: err?.response?.data?.message || err.message });
+        } catch (err: unknown) {
+          set({ error: (err as any)?.response?.data?.message || (err instanceof Error ? err.message : 'Unknown error') });
         }
       },
 

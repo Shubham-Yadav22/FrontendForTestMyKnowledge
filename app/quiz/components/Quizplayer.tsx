@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import Header from "@/app/components/Header";
 import { Poppins, Michroma } from "next/font/google";
 import { useQuizStore } from "../store/quizStore";
@@ -75,10 +76,12 @@ const QuizPlayer = () => {
           <div className="flex gap-9 m-6 border-b-1 border-black p-2 pb-4">
             {/* video */}
             <div className="lg:w-[360px] lg:h-[203px] rounded-2xl bg-white text-center">
-            {videoDetails && <img
+            {videoDetails && <Image
                   src={videoDetails?.thumbnail_url}
                   alt={videoDetails?.title}
                   className="w-full lg:h-[203px] sm:h-[250px] object-cover rounded-2xl"
+                  width={360}
+                  height={203}
                 />}
             </div>
 

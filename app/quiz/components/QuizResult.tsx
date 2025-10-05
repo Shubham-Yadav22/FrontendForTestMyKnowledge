@@ -1,11 +1,11 @@
 "use client"
 import React from "react";
+import Image from "next/image";
 import Header from "@/app/components/Header";
 import { Poppins, Michroma } from "next/font/google";
 import { useQuizStore } from "../store/quizStore";
 import QuizResultChart from "./Chart";
 import { useState } from "react";
-import { useAuth } from "@clerk/nextjs";
 import {useRouter} from "next/navigation";
 
 
@@ -59,10 +59,12 @@ const QuizResult = () => {
         <div className="grid grid-cols-3 gap-4 border-b-1 border-black">
           {/* video  */}
           <div className="h-[220px] rounded-2xl ">
-          {videoDetails && <img
+          {videoDetails && <Image
                   src={videoDetails?.thumbnail_url}
                   alt={videoDetails?.title}
                   className="w-full object-cover rounded-2xl"
+                  width={300}
+                  height={220}
                 />}
           </div>
 

@@ -283,9 +283,9 @@ const ChatWindow: React.FC = () => {
 
       setBotTyping(false);
       addMessage({ sender: "bot", text: botReply });
-    } catch (error: any) {
+    } catch (error: unknown) {
       setBotTyping(false);
-      addMessage({ sender: "bot", text: `⚠️ Error: ${error.message}` });
+      addMessage({ sender: "bot", text: `⚠️ Error: ${error instanceof Error ? error.message : 'Unknown error'}` });
     }
   };
 

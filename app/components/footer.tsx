@@ -46,7 +46,7 @@ const Footer = () => {
               project founded by four passionate innovators, dedicated to
               helping learners achieve their goals through personalized study
               plans and curated roadmaps. The platform analyzes each
-              individual's strengths, goals, and interests to recommend tailored
+              individual&apos;s strengths, goals, and interests to recommend tailored
               courses, resources, and learning paths—turning confusion into
               clarity and effort into progress.
             </p>

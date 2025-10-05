@@ -3,7 +3,6 @@
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { get } from "http";
 
 
 
@@ -61,7 +60,7 @@ export const InfiniteMovingCards = ({
     getDirection();
     getSpeed();
     setStart(true);
-  }, [direction,speed]);
+  }, [direction, speed, getDirection, getSpeed]);
 
 
   return (

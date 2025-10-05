@@ -41,8 +41,8 @@ export async function chatWithDocument(sessionId: string, prompt: string) {
     const res = await axios.post(`${API_BASE}/chat`, { session_id: sessionId, prompt });
     console.log("[Chat API] Response:", res.data);
     return res.data;
-  } catch (err: any) {
-    console.error("[Chat API] Error:", err.response?.data || err.message);
+  } catch (err: unknown) {
+    console.error("[Chat API] Error:", (err as any)?.response?.data || (err instanceof Error ? err.message : 'Unknown error'));
     throw err;
   }
 }

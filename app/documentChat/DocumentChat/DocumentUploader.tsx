@@ -122,6 +122,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 
 const ACCEPTED_TYPES = [
   "application/pdf",
@@ -202,10 +203,12 @@ const DocumentUploader: React.FC<DocumentUploaderProps> = ({ onUpload }) => {
       {previewUrl && (
         <div className="w-full h-full overflow-hidden flex items-center justify-center">
           {file?.type.startsWith("image/") ? (
-            <img
+            <Image
               src={previewUrl}
               alt="Preview"
               className="object-contain w-full h-full"
+              width={500}
+              height={500}
             />
           ) : file?.type === "application/pdf" ? (
             <iframe

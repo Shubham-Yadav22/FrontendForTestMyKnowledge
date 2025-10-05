@@ -12,7 +12,7 @@ export function usePdfViewer() {
   }, []);
 
   const onLoadSuccess = ({ numPages }: { numPages: number }) => setNumPages(numPages);
-  const onLoadError = (err: any) => setError(err.message);
+  const onLoadError = (err: Error) => setError(err.message);
 
   return { numPages, error, onLoadSuccess, onLoadError };
 }

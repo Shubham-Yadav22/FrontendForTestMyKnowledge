@@ -1,6 +1,5 @@
 "use client";
 // import ChatWindow from "./DocumentChat/ChatWindow";
-import ChatSidebar from "./DocumentChat/ChatSideBar";
 import Header from "../components/Header";
 import DocumentToolbar from "./DocumentChat/DocumentToolbar";
 import DocumentWithChat from "./DocumentChat/DocumentWithChat";
