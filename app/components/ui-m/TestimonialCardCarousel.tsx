@@ -17,6 +17,8 @@ export const InfiniteMovingCards = ({
     quote: string;
     name: string;
     title: string;
+    image?: string; // optional: path to image in public/ or remote
+    headline?: string;
   }[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
@@ -94,8 +96,8 @@ export const InfiniteMovingCards = ({
           >
             {/* Image */}
             <Image
-              src="/userTestimonial.png"
-              alt=""
+              src={item.image ?? "/userTestimonial.png"}
+              alt={item.name || "Testimonial"}
               width={214}
               height={214}
               className="
@@ -103,6 +105,8 @@ export const InfiniteMovingCards = ({
                 h-auto mt-4
               "
             />
+
+
 
             {/* Content */}
             <div className="flex-col p-2 mt-2">
@@ -136,22 +140,23 @@ export const InfiniteMovingCards = ({
               <div className="flex flex-col lg:gap-3 p-2">
                 <div className="mb-4">
                   <p className="text-[#646464] font-bold text-[0.6rem] sm:text-base lg:text-lg break-words">
-                    WHAT A UNIQUE SOLUTION
+                    {item.headline ?? "WHAT A UNIQUE SOLUTION"}
                   </p>
 
                   <p className="text-[#646464]  text-[0.45rem] lg:text-sm break-words overflow-hidden">
-                    Upload a YouTube link, Video, document, image, or voice note
-                    and let Yuki, your AI study companion, explain, answer
+                    {/* Upload a YouTube link, Video, document, image, or voice note
+                    and let Yuki, your AI study companion, explain, answer */}
+                    {item.quote}
                   </p>
                 </div>
 
                 <div>
                   <h2 className="text-[#646464] font-semibold text-sm sm:text-base lg:text-lg break-words text-[0.6rem] ">
-                    ARJUN KUMAR
+                    {item.name}
                   </h2>
 
                   <p className="text-[#646464] text-xs sm:text-sm lg:text-sm break-words overflow-hidden text-[0.45rem]">
-                    UI/UX Designer
+                    {item.title}
                   </p>
                 </div>
               </div>

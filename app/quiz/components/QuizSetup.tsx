@@ -150,6 +150,8 @@ const Quiz = () => {
             {videoDetails ? (
               <div className="w-full h-auto flex flex-col gap-4 rounded-2xl bg-[#B9CDDD] p-4">
                 <Image
+                height={100}
+                  width={100}
                   src={videoDetails.thumbnail_url}
                   alt={videoDetails.title}
                   className="w-full h-[200px] sm:h-[250px] lg:h-[300px]  rounded-2xl"

@@ -1,6 +1,6 @@
 import React from "react";
 import { Michroma, Poppins } from "next/font/google";
-import { InfiniteMovingCards } from "./ui-m/TestimonialCardCarousel"; // ✅ import default
+import { InfiniteMovingCards } from "./ui-m/TestimonialCardCarousel";
 
 // Fonts
 const michroma = Michroma({
@@ -18,20 +18,33 @@ const cardsData = [
   {
     id: 1,
     quote: "This is the best product I’ve ever used!",
-    name: "John Doe",
-    title: "CEO, Example Inc.",
+    name: "Abhishek Verma",
+    title: "Student",
+    image: "/verma_testimonials.png",
+    headline: "TURNING STUDY TIME INTO WIN TIME",
   },
   {
     id: 2,
     quote: "A fantastic experience from start to finish.",
-    name: "Jane Smith",
-    title: "Product Manager, Awesome Co.",
+    name: "Vidhik",
+    title: "Student",
+    image: "/vidhik-testmionial.png",
+    headline: "LEARNING THAT FEELS EFFORTLESS",
   },
   {
     id: 3,
     quote: "Highly recommended for anyone looking for quality.",
-    name: "Alex Johnson",
-    title: "Designer, Creative Studio",
+    name: "Shubham ",
+    title: "Student",
+    image: "/shubham-testimonial (1).png",
+    headline : "SMART ANSWERS. ZERO WAIT."
+  },
+  {
+    id: 4,
+    quote: "Good for students to learn effectively.",
+    name: "Arjun",
+    title: "Student",
+    headline: "YOUR NOTES, NOW A CONVERSATION",
   },
 ];
 
