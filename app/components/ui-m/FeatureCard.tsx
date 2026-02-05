@@ -1,6 +1,5 @@
 import React from "react";
 import { Poppins, Michroma } from "next/font/google";
-import Link from "next/link";
 
 const poppins = Poppins({
   weight: "400",
@@ -17,7 +16,6 @@ interface FeatureCardProps {
   subheading: string;
   size?: "large" | "small"; // default = large
   className?: string;
-  link?: string;
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({
@@ -25,13 +23,10 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   subheading,
   size = "large",
   className = "",
-  link = "",
 }) => {
   const isLarge = size === "large";
 
   return (
-    
-   
     <div
       className={`
         rounded-2xl flex flex-col gap-2 p-4 border border-[#B9CDDD] 
@@ -40,13 +35,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
         ${className}
       `}
     >
-
-<Link href={link} className="hover:text-[#5D85A1]">
-  <h2 className={`${michroma.className} text-lg`}>{heading}</h2>
-</Link>
-
-
-
+      <h2 className={`${michroma.className} text-lg`}>{heading}</h2>
 
       <p className={`${poppins.className} text-[#646464] text-sm`}>
         {subheading}

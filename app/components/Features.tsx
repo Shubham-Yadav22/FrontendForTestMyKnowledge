@@ -47,7 +47,6 @@ const Features = () => {
             heading="Quiz Your Video"
             subheading="Make sure you have learned everything by evaluating your understanding"
             size="small"
-            link="/quiz"
           />
         </div>
 
@@ -63,7 +62,6 @@ const Features = () => {
             heading="Chat with study materials"
             subheading="Make sure you have learned everything by evaluating your understanding"
             size="large"
-            link="/documentChat"
           />
         </div>
       </div>
